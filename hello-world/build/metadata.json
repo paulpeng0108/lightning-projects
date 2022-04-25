@@ -1,0 +1,6 @@
+{
+  "name": "hello-world",
+  "identifier": "com.clearbridge.app.hello-world",
+  "version": "1.0.0",
+  "icon": "./static/icon.png"
+}
