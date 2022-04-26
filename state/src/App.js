@@ -18,6 +18,7 @@
  */
 
 import { Lightning, Utils } from '@lightningjs/sdk'
+import { Box } from "./components/Box"
 
 export default class App extends Lightning.Component {
     static getFonts() {
@@ -36,13 +37,42 @@ export default class App extends Lightning.Component {
                 x: 50,
                 y: 50,
                 text: {
-                    text: "Light",
+                    text: "Light2",
                     fontFace: 'Regular',
                     fontSize: 64,
                     textColor: 0xbbffffff,
                 },
             },
+            Container: {
+                rect: true,
+                mount: 0.5,
+                x: 960,
+                y: 540,
+                h: 50,
+                w: 250,
+                color: 0xff808080,
+                flex: {
+                    padding: 20,
+                    justifyContent: "space-evenly"
+                },
+                BoxA: {
+                    type: Box,
+                    letter: 'A'
+                },
+                BoxB: {
+                    type: Box,
+                    letter: 'B'
+                }
+            }
         }
+    }
+
+    _focus(){
+        console.log("App focus")
+    }
+    
+    _unfocus(){
+        console.log("App unfocus")
     }
 
     _init() {
@@ -60,6 +90,14 @@ export default class App extends Lightning.Component {
         }
     }
 
+    _handleLeft(){
+        this._setState("BoxA")
+    }
+
+    _handleRight(){
+        this._setState("BoxB")
+    }
+
     /* 
     _handleUp
     _handleDowe
@@ -72,6 +110,19 @@ export default class App extends Lightning.Component {
 
     static _states(){
         return [
+            class BoxA extends this {
+                _getFocused(){
+                    return this.tag("BoxA")
+                }
+            },
+
+            class BoxB extends this {
+                _getFocused(){
+                    return this.tag("BoxB")
+                }
+            },
+
+
             class DarkTheme extends this {
                 $enter(){
                     this.tag("Background").patch({
@@ -92,7 +143,7 @@ export default class App extends Lightning.Component {
 
                     this.tag("Text").patch({
                         text: {
-                            text: "Light"
+                            text: "Light2"
                         },
                     })
                 }
